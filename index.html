@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amina Ebrahim — Business Analytics Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d1117;
+    --bg-soft: #161b22;
+    --bg-card: #1c2129;
+    --line: #2a3038;
+    --line-bright: #3a424d;
+    --text: #e8edf4;
+    --text-dim: #9aa5b4;
+    --text-faint: #6b7684;
+    --accent: #d4a574;
+    --accent-bright: #e8c39a;
+    --teal: #2dd4a7;
+    --blue: #4f9cff;
+    --violet: #a78bfa;
+    --amber: #fbbf24;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text);
+    line-height: 1.65; -webkit-font-smoothing: antialiased; overflow-x: hidden;
+  }
+  .serif { font-family: 'Fraunces', serif; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+
+  /* ─── BACKGROUND GLOW ─── */
+  .bg-glow {
+    position: fixed; top: -20%; right: -10%; width: 60%; height: 60%;
+    background: radial-gradient(circle, rgba(212,165,116,0.08) 0%, transparent 60%);
+    pointer-events: none; z-index: 0;
+  }
+
+  .container { max-width: 1080px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 1; }
+
+  /* ─── NAV ─── */
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(13,17,23,0.8); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); padding: 1rem 0; }
+  .nav-inner { max-width: 1080px; margin: 0 auto; padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; }
+  .nav-name { font-family: 'Fraunces'; font-weight: 600; font-size: 1.05rem; }
+  .nav-links { display: flex; gap: 1.6rem; font-size: 0.88rem; }
+  .nav-links a { color: var(--text-dim); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--text); }
+  .nav-gh { display: inline-flex; align-items: center; gap: 0.4rem; background: var(--bg-card); border: 1px solid var(--line-bright); color: var(--text); padding: 0.45rem 1rem; border-radius: 8px; font-size: 0.85rem; font-weight: 500; text-decoration: none; }
+  .nav-gh:hover { border-color: var(--accent); }
+  @media (max-width: 720px) { .nav-links { display: none; } }
+
+  /* ─── HERO ─── */
+  .hero { padding: 5rem 0 3.5rem; }
+  .hero-eyebrow { display: inline-flex; align-items: center; gap: 0.5rem; font-family: 'JetBrains Mono'; font-size: 0.78rem; color: var(--accent); letter-spacing: 0.08em; margin-bottom: 1.5rem; }
+  .hero-eyebrow .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 10px var(--teal); }
+  .hero h1 { font-family: 'Fraunces'; font-weight: 600; font-size: clamp(2.5rem, 7vw, 4.5rem); line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 1.3rem; }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero-lead { font-size: 1.18rem; color: var(--text-dim); max-width: 600px; margin-bottom: 2rem; }
+  .hero-tags { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 2.5rem; }
+  .hero-tag { background: var(--bg-card); border: 1px solid var(--line); border-radius: 8px; padding: 0.45rem 0.9rem; font-size: 0.82rem; font-family: 'JetBrains Mono'; color: var(--text-dim); }
+  .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--accent); color: #1a1208; font-weight: 600; padding: 0.8rem 1.6rem; border-radius: 10px; text-decoration: none; font-size: 0.95rem; transition: background 0.2s; }
+  .btn-primary:hover { background: var(--accent-bright); }
+  .btn-ghost { display: inline-flex; align-items: center; gap: 0.5rem; background: transparent; color: var(--text); border: 1px solid var(--line-bright); font-weight: 500; padding: 0.8rem 1.6rem; border-radius: 10px; text-decoration: none; font-size: 0.95rem; }
+  .btn-ghost:hover { border-color: var(--accent); }
+
+  /* ─── STATS BAR ─── */
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; margin: 1rem 0 4rem; }
+  .stat { background: var(--bg-soft); padding: 1.5rem; text-align: center; }
+  .stat-val { font-family: 'Fraunces'; font-size: 2rem; font-weight: 600; color: var(--accent); line-height: 1; }
+  .stat-label { font-size: 0.76rem; color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.5rem; }
+
+  /* ─── SECTION ─── */
+  .section { padding: 3rem 0; }
+  .section-head { margin-bottom: 2.5rem; }
+  .section-tag { font-family: 'JetBrains Mono'; font-size: 0.76rem; color: var(--accent); letter-spacing: 0.08em; }
+  .section-title { font-family: 'Fraunces'; font-weight: 600; font-size: 2.2rem; margin-top: 0.5rem; letter-spacing: -0.01em; }
+  .section-desc { color: var(--text-dim); margin-top: 0.6rem; max-width: 600px; }
+
+  /* ─── PROJECT CARDS ─── */
+  .projects { display: flex; flex-direction: column; gap: 1.5rem; }
+  .project { background: var(--bg-card); border: 1px solid var(--line); border-radius: 18px; padding: 2rem; transition: border-color 0.25s, transform 0.25s; position: relative; overflow: hidden; }
+  .project:hover { border-color: var(--line-bright); transform: translateY(-2px); }
+  .project-accent { position: absolute; left: 0; top: 0; bottom: 0; width: 4px; }
+  .project-grid { display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: start; }
+  @media (max-width: 720px) { .project-grid { grid-template-columns: 1fr; } }
+  .project-num { font-family: 'JetBrains Mono'; font-size: 0.8rem; color: var(--text-faint); margin-bottom: 0.6rem; }
+  .project-title { font-family: 'Fraunces'; font-weight: 600; font-size: 1.6rem; margin-bottom: 0.5rem; }
+  .project-desc { color: var(--text-dim); font-size: 0.95rem; margin-bottom: 1.2rem; max-width: 540px; }
+  .project-result { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--bg-soft); border: 1px solid var(--line); border-radius: 8px; padding: 0.5rem 0.9rem; font-size: 0.85rem; margin-bottom: 1.2rem; }
+  .project-result .label { color: var(--text-faint); }
+  .project-result .val { font-weight: 600; font-family: 'JetBrains Mono'; }
+  .project-tech { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .ptag { background: var(--bg-soft); border: 1px solid var(--line); border-radius: 6px; padding: 0.3rem 0.7rem; font-size: 0.76rem; font-family: 'JetBrains Mono'; color: var(--text-dim); }
+  .project-links { display: flex; flex-direction: column; gap: 0.7rem; min-width: 150px; }
+  @media (max-width: 720px) { .project-links { flex-direction: row; margin-top: 1.5rem; } }
+  .plink { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.7rem 1.2rem; border-radius: 9px; text-decoration: none; font-size: 0.88rem; font-weight: 500; transition: all 0.2s; white-space: nowrap; }
+  .plink-demo { background: var(--accent); color: #1a1208; }
+  .plink-demo:hover { background: var(--accent-bright); }
+  .plink-code { background: transparent; color: var(--text); border: 1px solid var(--line-bright); }
+  .plink-code:hover { border-color: var(--accent); }
+
+  /* ─── ABOUT ─── */
+  .about-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 3rem; align-items: start; }
+  @media (max-width: 720px) { .about-grid { grid-template-columns: 1fr; } }
+  .about-text p { color: var(--text-dim); margin-bottom: 1rem; }
+  .about-text strong { color: var(--text); font-weight: 600; }
+  .skills-box { background: var(--bg-card); border: 1px solid var(--line); border-radius: 16px; padding: 1.8rem; }
+  .skills-box h4 { font-family: 'Fraunces'; font-weight: 600; font-size: 1.1rem; margin-bottom: 1.2rem; }
+  .skill-row { margin-bottom: 1rem; }
+  .skill-name { display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 0.4rem; }
+  .skill-name span:last-child { color: var(--text-faint); font-family: 'JetBrains Mono'; font-size: 0.78rem; }
+  .skill-bar { height: 6px; background: var(--bg-soft); border-radius: 3px; overflow: hidden; }
+  .skill-fill { height: 100%; background: var(--accent); border-radius: 3px; }
+
+  /* ─── CONTACT ─── */
+  .contact { background: var(--bg-card); border: 1px solid var(--line); border-radius: 20px; padding: 3rem; text-align: center; margin: 2rem 0; }
+  .contact h3 { font-family: 'Fraunces'; font-weight: 600; font-size: 2rem; margin-bottom: 0.6rem; }
+  .contact p { color: var(--text-dim); margin-bottom: 2rem; max-width: 440px; margin-left: auto; margin-right: auto; }
+  .contact-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+  footer { border-top: 1px solid var(--line); padding: 2.5rem 0; text-align: center; color: var(--text-faint); font-size: 0.85rem; margin-top: 2rem; }
+  footer strong { color: var(--text-dim); }
+</style>
+</head>
+<body>
+<div class="bg-glow"></div>
+
+<nav>
+  <div class="nav-inner">
+    <span class="nav-name">Amina Ebrahim</span>
+    <div class="nav-links">
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a href="https://github.com/ameenaebrahima" class="nav-gh" target="_blank">&#9670; GitHub</a>
+  </div>
+</nav>
+
+<div class="container">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-eyebrow"><span class="dot"></span>Available for internships &middot; Bahrain</div>
+    <h1>Business analytics<br>that drives <em>decisions.</em></h1>
+    <p class="hero-lead">I'm Amina — a final-year Business Analytics student turning raw data into insights businesses can act on. Python, machine learning, and dashboards that answer real questions.</p>
+    <div class="hero-tags">
+      <span class="hero-tag">Python</span>
+      <span class="hero-tag">SQL</span>
+      <span class="hero-tag">Machine Learning</span>
+      <span class="hero-tag">Power BI</span>
+      <span class="hero-tag">Data Storytelling</span>
+    </div>
+    <div class="hero-cta">
+      <a href="#work" class="btn-primary">View my work &darr;</a>
+      <a href="https://github.com/ameenaebrahima" class="btn-ghost" target="_blank">&#9670; GitHub profile</a>
+    </div>
+  </header>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat"><div class="stat-val">5</div><div class="stat-label">Projects</div></div>
+    <div class="stat"><div class="stat-val">60K+</div><div class="stat-label">Records analyzed</div></div>
+    <div class="stat"><div class="stat-val">94%</div><div class="stat-label">Best model AUC</div></div>
+    <div class="stat"><div class="stat-val">3</div><div class="stat-label">ML models built</div></div>
+  </div>
+
+  <!-- WORK -->
+  <section class="section" id="work">
+    <div class="section-head">
+      <div class="section-tag">// Selected work</div>
+      <h2 class="section-title">Projects</h2>
+      <p class="section-desc">Each project solves a real business problem end-to-end — from data to dashboard to decision.</p>
+    </div>
+
+    <div class="projects">
+
+      <!-- PROJECT 1 -->
+      <div class="project">
+        <div class="project-accent" style="background:#d4a574"></div>
+        <div class="project-grid">
+          <div>
+            <div class="project-num">PROJECT 01 &middot; Customer Segmentation</div>
+            <h3 class="project-title">Coffee Shop Analytics</h3>
+            <p class="project-desc">RFM analysis + K-Means clustering on 57,000 coffee transactions, revealing that 13% of customers drive 45% of revenue — with a marketing playbook for each segment.</p>
+            <div class="project-result"><span class="label">Key insight:</span><span class="val" style="color:#d4a574">13% of customers = 45% of revenue</span></div>
+            <div class="project-tech">
+              <span class="ptag">Python</span><span class="ptag">scikit-learn</span><span class="ptag">K-Means</span><span class="ptag">RFM</span>
+            </div>
+          </div>
+          <div class="project-links">
+            <a href="https://ameenaebrahima.github.io/coffee-analytics/website/" class="plink plink-demo" target="_blank">Live demo &rarr;</a>
+            <a href="https://github.com/ameenaebrahima/coffee-analytics" class="plink plink-code" target="_blank">&#9670; Code</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROJECT 2 -->
+      <div class="project">
+        <div class="project-accent" style="background:#4f9cff"></div>
+        <div class="project-grid">
+          <div>
+            <div class="project-num">PROJECT 02 &middot; Forecasting</div>
+            <h3 class="project-title">AI Sales Forecasting</h3>
+            <p class="project-desc">A time-series model that predicts the next 90 days of sales at 93.6% accuracy — capturing weekly rhythm and Ramadan spikes so managers can plan inventory and staffing.</p>
+            <div class="project-result"><span class="label">Forecast:</span><span class="val" style="color:#4f9cff">BD 412K next quarter &middot; 93.6% accurate</span></div>
+            <div class="project-tech">
+              <span class="ptag">Python</span><span class="ptag">Prophet</span><span class="ptag">Time Series</span><span class="ptag">pandas</span>
+            </div>
+          </div>
+          <div class="project-links">
+            <a href="https://ameenaebrahima.github.io/sales-forecasting/website/" class="plink plink-demo" target="_blank">Live demo &rarr;</a>
+            <a href="https://github.com/ameenaebrahima/sales-forecasting" class="plink plink-code" target="_blank">&#9670; Code</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROJECT 3 -->
+      <div class="project">
+        <div class="project-accent" style="background:#a78bfa"></div>
+        <div class="project-grid">
+          <div>
+            <div class="project-num">PROJECT 03 &middot; Predictive ML</div>
+            <h3 class="project-title">Customer Churn Prediction</h3>
+            <p class="project-desc">An XGBoost model that predicts which customers will leave — and explains why — flagging BD 141K of at-risk revenue with 94% ROC-AUC and a retention action for each customer.</p>
+            <div class="project-result"><span class="label">Impact:</span><span class="val" style="color:#a78bfa">BD 141K revenue at risk identified</span></div>
+            <div class="project-tech">
+              <span class="ptag">Python</span><span class="ptag">XGBoost</span><span class="ptag">scikit-learn</span><span class="ptag">Explainable AI</span>
+            </div>
+          </div>
+          <div class="project-links">
+            <a href="https://ameenaebrahima.github.io/churn-prediction/website/" class="plink plink-demo" target="_blank">Live demo &rarr;</a>
+            <a href="https://github.com/ameenaebrahima/churn-prediction" class="plink plink-code" target="_blank">&#9670; Code</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROJECT 4 placeholder -->
+      <div class="project" style="opacity:0.6">
+        <div class="project-accent" style="background:#2dd4a7"></div>
+        <div class="project-grid">
+          <div>
+            <div class="project-num">PROJECT 04 &middot; Coming soon</div>
+            <h3 class="project-title">Marketing Campaign ROI Analyzer</h3>
+            <p class="project-desc">A/B test analysis and channel attribution — upload a campaign CSV and instantly see which channel to invest in next.</p>
+            <div class="project-tech">
+              <span class="ptag">Python</span><span class="ptag">Statistics</span><span class="ptag">A/B Testing</span>
+            </div>
+          </div>
+          <div class="project-links">
+            <span class="plink plink-code" style="cursor:default">In progress</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROJECT 5 placeholder -->
+      <div class="project" style="opacity:0.6">
+        <div class="project-accent" style="background:#fbbf24"></div>
+        <div class="project-grid">
+          <div>
+            <div class="project-num">PROJECT 05 &middot; Coming soon</div>
+            <h3 class="project-title">Dashwise — BI Platform</h3>
+            <p class="project-desc">My startup concept: a self-serve BI tool for GCC small businesses. Upload Excel, get an instant KPI dashboard with AI insights.</p>
+            <div class="project-tech">
+              <span class="ptag">Python</span><span class="ptag">Streamlit</span><span class="ptag">Claude AI</span><span class="ptag">SaaS</span>
+            </div>
+          </div>
+          <div class="project-links">
+            <span class="plink plink-code" style="cursor:default">In progress</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="section-head">
+      <div class="section-tag">// About me</div>
+      <h2 class="section-title">Who I am</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I'm a final-year <strong>Business Analytics</strong> student at the University of Bahrain, graduating in 2026, with a minor in Marketing.</p>
+        <p>What drives me is the moment data becomes a decision — when a chart stops being numbers and starts telling a business exactly what to do next. I build the full pipeline: pulling and cleaning data, modeling it with Python and machine learning, then designing dashboards that anyone can read.</p>
+        <p>I'm especially interested in <strong>applying AI to real business problems</strong> in the Bahraini and GCC market — from customer retention to sales forecasting. Outside analytics, I'm a photographer and I'm building a BI startup concept called Dashwise.</p>
+      </div>
+      <div class="skills-box">
+        <h4>Core skills</h4>
+        <div class="skill-row">
+          <div class="skill-name"><span>Python &middot; pandas &middot; NumPy</span><span>Advanced</span></div>
+          <div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-name"><span>Machine Learning</span><span>Advanced</span></div>
+          <div class="skill-bar"><div class="skill-fill" style="width:82%"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-name"><span>SQL</span><span>Proficient</span></div>
+          <div class="skill-bar"><div class="skill-fill" style="width:78%"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-name"><span>Power BI &middot; DAX</span><span>Proficient</span></div>
+          <div class="skill-bar"><div class="skill-fill" style="width:75%"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-name"><span>Data Storytelling</span><span>Advanced</span></div>
+          <div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section" id="contact">
+    <div class="contact">
+      <h3>Let's work together</h3>
+      <p>I'm looking for internship opportunities in data analysis, business intelligence, and marketing analytics. Let's talk.</p>
+      <div class="contact-links">
+        <a href="https://github.com/ameenaebrahima" class="btn-primary" target="_blank">&#9670; GitHub</a>
+        <a href="mailto:your-email@example.com" class="btn-ghost">&#9993; Email me</a>
+        <a href="#" class="btn-ghost">&#128279; LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <strong>Amina Ebrahim</strong> &middot; Business Analytics, University of Bahrain &middot; 2025
+</footer>
+
+</body>
+</html>
